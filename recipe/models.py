@@ -30,7 +30,7 @@ class Ingredient(models.Model):
     quantity = models.IntegerField()
 
     def __str__(self):
-        return '{} {} {}'.format(self.quantity, self.measurement, self.quantity)
+        return '{} {} {}'.format(self.quantity, self.measurement, self.name)
 
 class Step(models.Model):
     text = models.TextField(max_length=120)
