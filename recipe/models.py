@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 class Category(models.Model):
     name = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.name
+
 class Ingredient(models.Model):
     MEASUREMENT_CHOICES = (
         ('tsp', 'teaspoon'),
@@ -26,12 +29,21 @@ class Ingredient(models.Model):
     measurement = models.CharField(choices=MEASUREMENT_CHOICES, max_length=30)
     quantity = models.IntegerField()
 
+    def __str__(self):
+        return '{} {} {}'.format(self.quantity, self.measurement, self.quantity)
+
 class Step(models.Model):
     text = models.TextField(max_length=120)
+
+    def __str__(self):
+        return self.text
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(max_length=120)
+
+        def __str__(self):
+            return self.text
 
 class Meal(models.Model):
     name = models.CharField(max_length=60)
@@ -39,7 +51,7 @@ class Meal(models.Model):
     image = models.ImageField(upload_to = 'meal_images/')
     preparation_time = models.IntegerField()
     cooking_time = models.IntegerField()
-    user_rating = models.IntegerField()
+    user_rating = models.IntegerField(default=0)
     category = models.ManyToManyField(Category)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, default='')
     step = models.ForeignKey(Step, on_delete=models.CASCADE, default='')
