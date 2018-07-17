@@ -2,12 +2,11 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
-
 def register(request):
-    return HttpResponse('register')
+    return render(request, 'useraccount/register.html')
 
 def login(request):
-    return HttpResponse('login')
+    return render(request, 'useraccount/login.html')
 
 def logout(request):
-    return HttpResponse('logout')
+    return HttpResponse('this is where to logout')
