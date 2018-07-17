@@ -1,7 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import Meal
-
-from django.http import HttpResponse
 
 def index(request):
     meals = Meal.objects.all()
@@ -9,4 +7,5 @@ def index(request):
     return render(request, 'recipe/index.html', context)
 
 def detail(request, meal_id):
-    return HttpResponse("This is the detail view with meal id: {}".format(meal_id))
+    meal = get_object_or_404(Meal, pk=meal_id)
+    return render(request, 'recipe/detail.html', {'meal': meal})

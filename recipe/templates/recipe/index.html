@@ -1,5 +1,5 @@
 {% for meal in meals %}
-    <h2>{{ meal.name | title }}</h2>
+    <h2><a href="{{ meal.id }}">{{ meal.name | title }}</a></h2>
     <img src="{{ meal.image }}" alt="{{ meal.image }}">
     <p>{{ meal.intro }}</p>
 {% endfor %}
