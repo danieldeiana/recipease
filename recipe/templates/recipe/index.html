@@ -1,4 +1,5 @@
 {% extends 'recipease/base.html' %}
+{% block title %}Home{% endblock %}
 {% block content %}
     <form method="get">
         {{ filter.form.as_p }}
@@ -8,7 +9,7 @@
 
     </form>
     {% for meal in filter.qs %}
-        <h3>{{ meal.name }}</h3>
+        <a href="{{ meal.id }}"><h3>{{ meal.name }}</h3></a>
         <p>{{ meal.intro }}</p>
         <p>User rating - {{ meal.user_rating }}</p>
     {% endfor %}

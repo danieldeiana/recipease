@@ -1,5 +1,5 @@
 {% extends 'recipease/base.html' %}
-
+{% block title %}{{ meal.name }}{% endblock %}
 {% block content %}
     <h2>{{ meal.name | title }}</h2>
 {% endblock %}
