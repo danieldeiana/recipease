@@ -1,9 +1,15 @@
 {% extends 'recipease/base.html' %}
-
 {% block content %}
-    {% for meal in meals %}
-        <h2><a href="{{ meal.id }}">{{ meal.name | title }}</a></h2>
-        <img src="{{ meal.image }}" alt="{{ meal.image }}">
+    <form method="get">
+        {{ filter.form.as_p }}
+        <button type="submit">Search</button>
+
+        <button onclick="location.href='/'" type="reset">reset filters</button>
+
+    </form>
+    {% for meal in filter.qs %}
+        <h3>{{ meal.name }}</h3>
         <p>{{ meal.intro }}</p>
+        <p>User rating - {{ meal.user_rating }}</p>
     {% endfor %}
 {% endblock %}
