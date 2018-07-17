@@ -1,1 +1,5 @@
-<h2>{{ meal.name | title }}</h2>
+{% extends 'recipease/base.html' %}
+
+{% block content %}
+    <h2>{{ meal.name | title }}</h2>
+{% endblock %}
