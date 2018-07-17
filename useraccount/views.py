@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 
@@ -19,4 +20,5 @@ def login(request):
     return render(request, 'useraccount/login.html')
 
 def logout(request):
-    return HttpResponse('this is where to logout')
+    logout(request)
+    return redirect('index')
