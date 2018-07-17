@@ -1,4 +1,15 @@
-<h1>Recipease</h1>
-
-{% block content %}
-{% endblock %}
+<!DOCTYPE html>
+<head>
+    <title>Recipease | {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Recipease</h1>
+    </header>
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer>
+    </footer>
+</body>
