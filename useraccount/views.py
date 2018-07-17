@@ -1,9 +1,19 @@
-from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect, render
 
+# *** remove once implemented logout view ***
 from django.http import HttpResponse
 
 def register(request):
-    return render(request, 'useraccount/register.html')
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+    context = {'from': form}
+    return render(request, 'useraccount/register.html', context)
 
 def login(request):
     return render(request, 'useraccount/login.html')
