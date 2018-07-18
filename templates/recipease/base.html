@@ -13,7 +13,10 @@
                 <a href="{% url 'useraccount:logout' %}">logout</a>
             {% endif %}
         </nav>
-        <p>Hi {{ user.username }}</p>
+        {% if user.is_authenticated %}
+            <p>Hi {{ user.username }}</p>
+        {% endif %}
+        <a href="{% url 'premium:payment' %}">Go Premium!</a>
     </header>
     <div>
         {% block content %}

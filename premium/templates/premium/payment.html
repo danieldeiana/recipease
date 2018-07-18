@@ -1,0 +1,18 @@
+{% extends 'recipease/base.html' %}
+{% block title %}go premium!{% endblock %}
+{% block content %}
+    <form action="{% url 'premium:process' %}" method="POST">
+        {% csrf_token %}
+        <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_xWzrySal10vHM4D5VQpXBu3h"
+            data-amount="99"
+            data-zip-code="true"
+            data-name="Recipease Premium"
+            data-description="Widget"
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-locale="auto"
+            data-currency="gbp">
+        </script>
+    </form>
+{% endblock %}
