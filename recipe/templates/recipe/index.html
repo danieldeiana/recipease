@@ -9,7 +9,7 @@
 
     </form>
     {% for meal in filter.qs %}
-        <a href="{{ meal.id }}"><h3>{{ meal.name }}</h3></a>
+        <a href="{% url 'recipe:detail' meal.id %}"><h3>{{ meal.name }}</h3></a>
         <p>{{ meal.intro }}</p>
         <p>User rating - {{ meal.user_rating }}</p>
     {% endfor %}
