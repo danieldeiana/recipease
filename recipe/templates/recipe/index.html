@@ -4,9 +4,7 @@
     <form method="get">
         {{ filter.form.as_p }}
         <button type="submit">Search</button>
-
         <button onclick="location.href='/'" type="reset">reset filters</button>
-
     </form>
     {% if filter.qs %}
         {% for meal in filter.qs %}

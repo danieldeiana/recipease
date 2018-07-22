@@ -15,8 +15,14 @@
         </nav>
         {% if user.is_authenticated %}
             <p>Hi {{ user.username }}</p>
+
+            {% if not premium.activated %}
+                <a href="{% url 'premium:payment' %}">Go Premium!</a>
+            {% endif %}
+
         {% endif %}
-        <a href="{% url 'premium:payment' %}">Go Premium!</a>
+
+
     </header>
     <div>
         {% block content %}
