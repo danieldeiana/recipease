@@ -4,8 +4,9 @@
 </head>
 <body>
     <header>
-        <h1>Recipease</h1>
+        <a href="{% url 'recipe:index' %}"><h1>Recipease</h1></a>
         <nav>
+            <a href="{% url 'recipe:index' %}">home</a>
             {% if not user.is_authenticated %}
                 <a href="{% url 'useraccount:register' %}">register</a>
                 <a href="{% url 'useraccount:login' %}">login</a>

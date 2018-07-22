@@ -2,4 +2,11 @@
 {% block title %}{{ meal.name }}{% endblock %}
 {% block content %}
     <h2>{{ meal.name | title }}</h2>
+    {% if premium.activated %}
+        {% if meal not in premium.favourites.all %}
+            <a href="{% url 'premium:add_favourite' meal.id %}">Add to favourites</a>
+        {% else %}
+            <a href="{% url 'premium:remove_favourite' meal.id %}">Remove from favourites</a>
+        {% endif %}    
+    {% endif %}
 {% endblock %}
