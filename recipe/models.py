@@ -48,7 +48,7 @@ class Comment(models.Model):
 class Meal(models.Model):
     name = models.CharField(max_length=60)
     intro = models.CharField(max_length=180)
-    image = models.ImageField(upload_to='meal_images/', default='meal_images/no_image.jpeg')
+    image = models.CharField(max_length=180, null=True, blank=True)
     preparation_time = models.IntegerField()
     cooking_time = models.IntegerField()
     user_rating = models.IntegerField(default=0)

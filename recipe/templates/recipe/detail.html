@@ -1,4 +1,5 @@
 {% extends 'recipease/base.html' %}
+{% load static %}
 {% block title %}{{ meal.name }}{% endblock %}
 {% block content %}
     <h2>{{ meal.name | title }}</h2>
@@ -11,18 +12,18 @@
         {% endif %}
     {% endif %}
     <p>{{ meal.intro }}</p>
-    <img src="{{ meal.image }}" alt="A picture of {{ meal.name }}">
+    {% if not meal.image %}
+        <img src="{% static 'recipe/images/no_image.jpeg' %}" alt="no image available"/>
+    {% else %}
+        image is {{ meal.image }}
+    {% endif %}
     <p>Preperation time - {{ meal.preparation_time }}</p>
     <p>Cooking time - {{ meal.cooking_time }}</p>
     <div id="ingredients">
         <h3>Ingredients</h3>
         <ul>
             {% for ingredient in meal.ingredient.all %}
-                    {% if ingredient.quantity == 1 %}
-                        <li>{{ ingredient.quantity }} {{ ingredient.measurement }} of {{ ingredient.name }}</li>
-                    {% else %}
-                        <li>{{ ingredient.quantity }} {{ ingredient.measurement }}'s of {{ ingredient.name }}</li>
-                    {% endif %}
+                <li>{{ ingredient.quantity }} {{ ingredient.measurement }} {{ ingredient.name }}</li>
             {% endfor %}
         </ul>
     </div>
