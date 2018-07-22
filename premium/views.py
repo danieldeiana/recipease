@@ -5,9 +5,6 @@ from premium.models import Premium
 
 stripe.api_key = config('STRIPE_APIKEY')
 
-# !!! delete once views are fully implemented with render !!!
-from django.http import HttpResponse
-
 def payment(request):
     # If user authenticated, render stripe form and return auth' token
     if not request.user.is_authenticated:
