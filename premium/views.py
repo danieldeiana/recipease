@@ -1,6 +1,7 @@
 from django.shortcuts import  redirect, render
 from decouple import config
 import stripe
+from premium.models import Premium
 
 stripe.api_key = config('STRIPE_APIKEY')
 
@@ -22,4 +23,8 @@ def process(request):
         description="premium content, Recipease",
         source=token,
     )
-    return HttpResponse('Thanks, your payment was successfull')
+    current_user = request.user
+    users_premium = Premium.objects.get(user_id=current_user.id)
+    users_premium.activated = True
+    users_premium.save()
+    return redirect('recipe:index')
