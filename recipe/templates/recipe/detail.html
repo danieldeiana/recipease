@@ -15,7 +15,7 @@
     {% if not meal.image %}
         <img src="{% static 'recipe/images/no_image.jpeg' %}" alt="no image available"/>
     {% else %}
-        image is {{ meal.image }}
+        image is {{ meal.image }} <!-- render image here -->
     {% endif %}
     <p>Preperation time - {{ meal.preparation_time }}</p>
     <p>Cooking time - {{ meal.cooking_time }}</p>

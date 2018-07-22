@@ -1,0 +1,29 @@
+/* wireframe styles */
+header {
+    border: 1px solid #5F5;
+}
+
+nav {
+    border: 1px solid #F55;
+}
+
+nav a {
+    border: 1px solid #F00;
+}
+
+form p {
+    border: 1px solid #55F;
+}
+
+/* filter input and select buttons */
+p input, p select {
+    background: green;
+}
+
+label {
+    color: purple;
+}
+
+img {
+    border: 1px solid #FF5;
+}

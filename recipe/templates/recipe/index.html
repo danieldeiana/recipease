@@ -1,4 +1,5 @@
 {% extends 'recipease/base.html' %}
+{% load static %}
 {% block title %}Home{% endblock %}
 {% block content %}
     <form method="get">
@@ -9,6 +10,11 @@
     {% if filter.qs %}
         {% for meal in filter.qs %}
             <a href="{% url 'recipe:detail' meal.id %}"><h3>{{ meal.name }}</h3></a>
+            {% if not meal.image %}
+                <img src="{% static 'recipe/images/no_image.jpeg' %}" alt="no image available"/>
+            {% else %}
+                image is {{ meal.image }} <!-- render image here -->
+            {% endif %}
             <p>{{ meal.intro }}</p>
             <p>User rating - {{ meal.user_rating }}</p>
         {% endfor %}
