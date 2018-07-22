@@ -2,11 +2,41 @@
 {% block title %}{{ meal.name }}{% endblock %}
 {% block content %}
     <h2>{{ meal.name | title }}</h2>
+    <p>User rating - {{ meal.user_rating }}</p>
     {% if premium.activated %}
         {% if meal not in premium.favourites.all %}
             <a href="{% url 'premium:add_favourite' meal.id %}">Add to favourites</a>
         {% else %}
             <a href="{% url 'premium:remove_favourite' meal.id %}">Remove from favourites</a>
-        {% endif %}    
+        {% endif %}
     {% endif %}
+    <p>{{ meal.intro }}</p>
+    <img src="{{ meal.image }}" alt="A picture of {{ meal.name }}">
+    <p>Preperation time - {{ meal.preparation_time }}</p>
+    <p>Cooking time - {{ meal.cooking_time }}</p>
+    <div id="ingredients">
+        <h3>Ingredients</h3>
+        <ul>
+            {% for ingredient in meal.ingredient.all %}
+                    {% if ingredient.quantity == 1 %}
+                        <li>{{ ingredient.quantity }} {{ ingredient.measurement }} of {{ ingredient.name }}</li>
+                    {% else %}
+                        <li>{{ ingredient.quantity }} {{ ingredient.measurement }}'s of {{ ingredient.name }}</li>
+                    {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="steps">
+        <h3>Steps</h3>
+        <ul>
+            {% for step in meal.step.all %}
+                <li>{{ step }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <h3>Comments</h3>
+    {% for comment in meal.comment.all %}
+        <h4>{{ comment.user.username }}</h4>
+        <p>{{ comment.text }}</p>
+    {% endfor %}
 {% endblock %}

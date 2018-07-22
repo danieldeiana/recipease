@@ -38,7 +38,6 @@ class Step(models.Model):
     def __str__(self):
         return self.text
 
-
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(max_length=120)
