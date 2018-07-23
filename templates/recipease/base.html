@@ -2,11 +2,14 @@
 <!DOCTYPE html>
 <head>
     <title>Recipease | {% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'recipe/css/base.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'recipe/css/base.css' %}">    
 </head>
 <body>
     <header>
         <a href="{% url 'recipe:index' %}"><h1>Recipease</h1></a>
+        <p id="strapline">What's on the menu?</p>
+        <div id="click-icons"><p id="click-nav">N</p><p id="click-filter">F</p></div>
         <nav>
             <a href="{% url 'recipe:index' %}">home</a>
             {% if not user.is_authenticated %}
@@ -17,7 +20,12 @@
             {% endif %}
         </nav>
         {% if user.is_authenticated %}
-            <p>Hi {{ user.username }}</p>
+            <p id="welcome-message">
+                Hi {{ user.username | title }}
+                {% if premium.activated %}
+                    <span> - premium member</span>
+                {% endif %}
+            </p>
 
             {% if not premium.activated %}
                 <a href="{% url 'premium:payment' %}">Go Premium!</a>
