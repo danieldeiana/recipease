@@ -1,8 +1,10 @@
 from decouple import config
+from django.contrib.auth.models import User
 from django.shortcuts import  redirect, render
 import stripe
 from premium.models import Premium
-from recipe.models import Meal
+from premium.forms import CommentForm
+from recipe.models import Comment, Meal
 
 stripe.api_key = config('STRIPE_APIKEY')
 
@@ -40,3 +42,21 @@ def remove_favourite(request, meal_id):
     users_premium = Premium.objects.get(user_id=current_user.id)
     users_premium.favourites.remove(meal)
     return redirect('recipe:detail', meal_id)
+
+def comment(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            user_id = form.cleaned_data['user_id']
+            meal_id = form.cleaned_data['meal_id']
+
+            meal = Meal.objects.get(id=meal_id)
+            user = User.objects.get(id=user_id)
+
+            new_comment = Comment(user=user, text=text)
+            new_comment.save()
+            meal.comment.add(new_comment)
+            meal.save()
+
+            return redirect('recipe:detail', meal_id)

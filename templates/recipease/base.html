@@ -3,13 +3,20 @@
 <head>
     <title>Recipease | {% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
+        rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" 
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Cookie|Pacifico" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'recipe/css/base.css' %}">    
 </head>
 <body>
     <header>
         <a href="{% url 'recipe:index' %}"><h1>Recipease</h1></a>
         <p id="strapline">What's on the menu?</p>
-        <div id="click-icons"><p id="click-nav">N</p><p id="click-filter">F</p></div>
+        <div id="click-icons">
+            <i class="fa fa-bars" id="click-nav"></i>
+            <i class="fa fa-search" id="click-filter"></i>
+        </div>
         <nav>
             <a href="{% url 'recipe:index' %}">home</a>
             {% if not user.is_authenticated %}
@@ -18,7 +25,7 @@
             {% else %}
                 <a href="{% url 'useraccount:logout' %}">logout</a>
             {% endif %}
-            <p id="close-nav"><-</p>
+            <i class="fa fa-times-circle" id="close-nav"></i>
         </nav>
         {% if user.is_authenticated %}
             <p id="welcome-message">
@@ -31,10 +38,7 @@
             {% if not premium.activated %}
                 <a href="{% url 'premium:payment' %}">Go Premium!</a>
             {% endif %}
-
         {% endif %}
-
-
     </header>
     <div>
         {% block content %}

@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from .filters import MealFilter
 from .models import Meal
+from premium.forms import CommentForm
 from premium.models import Premium
 
 def index(request):
@@ -21,9 +22,12 @@ def detail(request, meal_id):
     meal = get_object_or_404(Meal, pk=meal_id)
     current_user = request.user
     premium = {}
+    comment_form = CommentForm()
     if current_user.username:
         premium = Premium.objects.get(user_id=current_user.id)
     context = {
         'meal': meal,
-        'premium': premium}
+        'premium': premium,
+        'comment_form': comment_form,
+        }
     return render(request, 'recipe/detail.html', context)

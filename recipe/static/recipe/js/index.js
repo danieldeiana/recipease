@@ -7,7 +7,12 @@ var nav = document.getElementsByTagName('nav')[0];
 var recipeFilter = document.getElementById('recipe-filter');
 
 nav.style.display = 'none';
-recipeFilter.style.display = 'none';
+
+if (recipeFilter){
+    recipeFilter.style.display = 'none';
+} else {
+    document.getElementById('click-filter').style.display = 'none';
+};
 
 clickNav.onclick = function(){
     nav.style.display = 'flex';
@@ -24,7 +29,9 @@ closeNav.onclick = function(){
     clickIcons.style.display = 'flex';
 }
 
-closeFilter.onclick = function(){
-    recipeFilter.style.display = 'none';
-    clickIcons.style.display = 'flex';
-}
+if (recipeFilter){
+    closeFilter.onclick = function(){
+        recipeFilter.style.display = 'none';
+        clickIcons.style.display = 'flex';
+    }
+};

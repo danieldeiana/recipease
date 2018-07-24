@@ -2,42 +2,72 @@
 {% load static %}
 {% block title %}{{ meal.name }}{% endblock %}
 {% block content %}
-    <h2>{{ meal.name | title }}</h2>
-    <p>User rating - {{ meal.user_rating }}</p>
-    {% if premium.activated %}
-        {% if meal not in premium.favourites.all %}
-            <a href="{% url 'premium:add_favourite' meal.id %}">Add to favourites</a>
-        {% else %}
-            <a href="{% url 'premium:remove_favourite' meal.id %}">Remove from favourites</a>
+    <div id="recipe-detail">
+        <h2>{{ meal.name | title }}</h2>
+        <p>User rating - {{ meal.user_rating }}/5</p>
+        {% if premium.activated %}
+            {% if meal not in premium.favourites.all %}
+                <a href="{% url 'premium:add_favourite' meal.id %}">Add to favourites</a>
+            {% else %}
+                <a href="{% url 'premium:remove_favourite' meal.id %}">Remove from favourites</a>
+            {% endif %}
         {% endif %}
-    {% endif %}
-    <p>{{ meal.intro }}</p>
-    {% if not meal.image %}
-        <img src="{% static 'recipe/images/no_image.jpeg' %}" alt="no image available"/>
-    {% else %}
-        image is {{ meal.image }} <!-- render image here -->
-    {% endif %}
-    <p>Preperation time - {{ meal.preparation_time }}</p>
-    <p>Cooking time - {{ meal.cooking_time }}</p>
-    <div id="ingredients">
-        <h3>Ingredients</h3>
-        <ul>
-            {% for ingredient in meal.ingredient.all %}
-                <li>{{ ingredient.quantity }} {{ ingredient.measurement }} {{ ingredient.name }}</li>
-            {% endfor %}
-        </ul>
+        <p>{{ meal.intro }}</p>
+        {% if not meal.image %}
+            <img src="{% static 'recipe/images/no_image.jpeg' %}" alt="no image available"/>
+        {% else %}
+            image is {{ meal.image }} <!-- render image here -->
+        {% endif %}
+        <p>Preperation time - {{ meal.preparation_time }} minutes</p>
+        <p>Cooking time - {{ meal.cooking_time }} minutes</p>
+        <div id="ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+                {% for ingredient in meal.ingredient.all %}
+                    <li>{{ ingredient.quantity }} {{ ingredient.measurement }} {{ ingredient.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="steps">
+            <h3>Steps</h3>
+            <ul>
+                {% for step in meal.step.all %}
+                    <li>{{ step }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <h3>Comments</h3>
+
+        {% if premium.activated %}
+            <div id="new-comment">
+                <form action="{% url 'premium:comment' %}" method="post">
+                    {% csrf_token %}
+                    {{ comment_form.text.errors }}
+                    {{ comment_form.text.label }}
+                    {{ comment_form.text }}
+                    {{ comment_form.meal_id }}
+                    {{ comment_form.user_id }}
+                    <input type="submit" value="add comment"/>
+                    <script>
+                        var meal_id = document.getElementsByTagName('input')[2];
+                        var user_id = document.getElementsByTagName('input')[3];
+                        meal_id.value = {{ meal.id }};
+                        user_id.value = {{ user.id }};
+                        meal_id.style.display = 'none';
+                        user_id.style.display = 'none';
+                    </script>
+                </form>
+
+            </div>
+        {% else %}
+            <p>Become a premium member to leave comments</p>
+        {% endif %}
+        </div>
+        {% for comment in meal.comment.all reversed %}
+            <div id="detail-comment">
+                <h4>{{ comment.user.username }}</h4>
+                <p>{{ comment.text }}</p>
+            </div>
+        {% endfor %}        
     </div>
-    <div id="steps">
-        <h3>Steps</h3>
-        <ul>
-            {% for step in meal.step.all %}
-                <li>{{ step }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <h3>Comments</h3>
-    {% for comment in meal.comment.all %}
-        <h4>{{ comment.user.username }}</h4>
-        <p>{{ comment.text }}</p>
-    {% endfor %}
 {% endblock %}
