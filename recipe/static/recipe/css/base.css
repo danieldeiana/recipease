@@ -175,6 +175,13 @@ input#id_name {
 
 #detail-comment {
     border-bottom: 1px dotted black;
+    text-align: center;
+}
+
+#new-comment input {
+    width: 95%;
+    height: 70px;
+    font-size: 20px;
 }
 /*
     Class styles

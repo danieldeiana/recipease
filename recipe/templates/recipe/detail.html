@@ -4,7 +4,6 @@
 {% block content %}
     <div id="recipe-detail">
         <h2>{{ meal.name | title }}</h2>
-        <p>User rating - {{ meal.user_rating }}/5</p>
         {% if premium.activated %}
             {% if meal not in premium.favourites.all %}
                 <a href="{% url 'premium:add_favourite' meal.id %}">Add to favourites</a>

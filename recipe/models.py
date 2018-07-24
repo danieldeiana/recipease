@@ -51,7 +51,6 @@ class Meal(models.Model):
     image = models.CharField(max_length=180, null=True, blank=True)
     preparation_time = models.IntegerField()
     cooking_time = models.IntegerField()
-    user_rating = models.IntegerField(default=0)
     category = models.ManyToManyField(Category)
     step = models.ManyToManyField(Step)
     ingredient = models.ManyToManyField(Ingredient)
