@@ -217,6 +217,22 @@ input#id_name {
     color: #CC0;
     text-shadow: #550 0px 2px 3px;
 }
+
+/*
+    login-register-form
+*/
+
+.login-register-form input {
+    font-size: 20px;
+    height: 20px;
+    border-radius: 10px;
+
+}
+
+.login-register-form input:last-child {
+    font-size: 20px;
+}
+
 /*
     Media
 */
