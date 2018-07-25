@@ -6,7 +6,9 @@ var closeFilter = document.getElementById('close-filter');
 var nav = document.getElementsByTagName('nav')[0];
 var recipeFilter = document.getElementById('recipe-filter');
 
-nav.style.display = 'none';
+if(window.outerWidth <= 1023){
+    nav.style.display = 'none';
+};
 
 if (recipeFilter){
     recipeFilter.style.display = 'none';

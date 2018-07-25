@@ -4,8 +4,15 @@ from .models import Meal
 from premium.forms import CommentForm
 from premium.models import Premium
 
-def index(request):
-    meal_list = Meal.objects.all()
+def index(request, favourites=None):
+    if favourites:
+        premium_user = Premium.objects.get(user_id=request.user.id)
+        favourite_id_list = premium_user.favourite_id_list
+        meal_list = Meal.objects.filter(id__in=favourite_id_list)
+    else:    
+        meal_list = Meal.objects.all()
+
+
     meal_filter = MealFilter(request.GET, queryset=meal_list)
     current_user = request.user
     premium = {}

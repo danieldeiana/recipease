@@ -3,7 +3,7 @@ header img {
 }
 
 body {
-    background: #FFC;
+    background: #DDB;
 }
 
 h1 {
@@ -17,18 +17,20 @@ nav {
     flex-direction: column;
     text-align: center;
     padding: 10px 0;
-    background: #FFC;
-    border-top: 1px dotted black;
-    border-bottom: 1px dotted black;
+    background: #522;
+    border-top: 3px dotted black;
+    border-bottom: 3px dotted black;
 }
 
 nav a {
-    font-size: 20px;
-    background: #FFC;
+    color: white;
+    font-size: 25px;
+    background: #522;
     padding: 5px;
     border-radius: 5px;
     margin: 8px 0;
     font-weight: bold;
+    text-shadow: #300 0px 3px 3px;
 }
 
 a {
@@ -38,7 +40,7 @@ a {
 
 img {
     width: 100%;
-    border: 1px dotted black;
+    border: 3px dotted black;
 }
 
 /*
@@ -51,7 +53,7 @@ img {
     font-family: 'Cookie', cursive;
 }
 
-#welcome-message {
+#welcome-message, #view-favourites {
     text-align: center;
 }
 
@@ -61,29 +63,35 @@ img {
     font-weight: bold;
     font-size: 20px;
     margin-top: -20px;
-    border-bottom: 1px dotted black;
+    border-bottom: 3px dotted black;
     padding-bottom: 20px;
 }
 
 #recipe-filter {
-    background: #FFC;
+    background: #252;
     padding: 1px 0 15px 0;
-    border-bottom: 1px dotted black;
-    border-top: 1px dotted black;
+    border-bottom: 3px dotted black;
+    border-top: 3px dotted black;
 }
 
 #recipe-filter h2, #recipe-detail h2 {
     text-align: center;
     font-size: 20px;
     text-decoration: underline;
+    color: black;
+    text-shadow: #030 0px 3px 3px;
+}
+
+#recipe-filter h2 {
+    color: white;
 }
 
 #recipe-filter p select, #recipe-filter p input {
     width: 90%;
-    border: 2px dotted black;
+    border: 3px dotted black;
     border-radius: 10px;
     text-align: center;
-    background: #FFC;
+    background: #EFE;
 }
 
 #recipe-filter option {
@@ -94,8 +102,8 @@ img {
 
 #recipe-filter button{
     font-size: 16px;
-    color: #222;
-    background: #FFF;
+    color: white;
+    background: #252;
     font-weight: bold;
 }
 
@@ -111,6 +119,13 @@ input#id_name {
 
 #recipe-filter p, #recipe-detail p {
     text-align: center;
+    color: white;
+    text-shadow: #030 0px 3px 3px;
+}
+
+#recipe-detail p, #recipe-detail h2 {
+    color: black;
+    text-shadow: none;
 }
 
 #recipe-filter label {
@@ -124,20 +139,20 @@ input#id_name {
 }
 
 #filter-buttons button {
-    border: 2px dotted black;
-    background: #FFC;
+    border: 3px dotted black;
+    background: #252;
     padding: 5px;
     border-radius: 5px;
 }
 
 #index-recipe-display {
     text-align: center;
-    border-bottom: 1px dotted black;
+    border-bottom: 3px dotted black;
 }
 
 #index-recipe-display h3, #recipe-detail h3 {
     font-family: 'Cookie', cursive;
-    margin-bottom: -20px;
+    margin-bottom: -8px;
     font-size: 40px;
 }
 
@@ -155,7 +170,7 @@ input#id_name {
     font-size: 28px;
     text-align: center;
     margin-bottom: 2px;
-    border-bottom: 1px dotted black;
+    border-bottom: 3px dotted black;
     padding-top: 20px;
     font-family: 'Cookie', cursive;
 }
@@ -174,7 +189,7 @@ input#id_name {
 }
 
 #detail-comment {
-    border-bottom: 1px dotted black;
+    border-bottom: 3px dotted black;
     text-align: center;
 }
 
@@ -182,7 +197,50 @@ input#id_name {
     width: 95%;
     height: 70px;
     font-size: 20px;
+    border: 3px dotted black;
+}
+
+#new-comment button {
+    border: 3px dotted black;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+#close-nav, #close-filter {
+    font-size: 25px;
+    color: white;
+    text-shadow: #300 0px 3px 3px;
+}
+
+#view-favourites i {
+    font-size: 25px;
+    color: #CC0;
+    text-shadow: #550 0px 2px 3px;
 }
 /*
-    Class styles
+    Media
 */
+@media only screen and (min-width: 1024px) {
+    #click-nav, #close-nav {
+        display: none;
+    }
+    nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    #recipe-filter-form {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: 500px) {
+    #index-recipe-display {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    #index-recipe {
+        width: 40%;
+    }
+}

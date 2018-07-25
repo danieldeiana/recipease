@@ -2,10 +2,19 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 {% block content %}
+    <div id="view-favourites">
+        {% if request.path == '/' %}
+            {% if premium.activated %}
+                <a href="{% url 'recipe:favourites' True %}">View your favourites <i class="fa fa-star"></i></a>
+            {% endif %}
+        {% endif %}
+    </div>
     <div id="recipe-filter">
         <h2>Filter recipes</h2>
         <form method="get">
-            {{ filter.form.as_p }}
+            <div id="recipe-filter-form">
+                {{ filter.form.as_p }}
+            </div>
             <div id="filter-buttons">
                 <button type="submit">Search</button>
                 <button onclick="location.href='/'" type="reset">reset filters</button>
@@ -16,13 +25,16 @@
     <div id="index-recipe-display">
         {% if filter.qs %}
             {% for meal in filter.qs %}
-                <a href="{% url 'recipe:detail' meal.id %}"><h3>{{ meal.name | title }}</h3></a>
-                {% if not meal.image %}
-                    <img src="{% static 'recipe/images/no_image.jpeg' %}" alt="no image available"/>
-                {% else %}
-                    image is {{ meal.image }} <!-- render image here -->
-                {% endif %}
-                <p>{{ meal.intro }}</p>
+                <div id="index-recipe">
+                    <a href="{% url 'recipe:detail' meal.id %}"><h3>{{ meal.name | title }}</h3>
+                        <i class="fa fa-arrow-right"></i></a>
+                    {% if not meal.image %}
+                        <img src="{% static 'recipe/images/no_image.jpeg' %}" alt="no image available"/>
+                    {% else %}
+                        <img src="{{ meal.image }}" alt="an image of {{ meal.image }}"/>
+                    {% endif %}
+                    <p>{{ meal.intro }}</p>
+                </div>
             {% endfor %}
         {% else %}
             <p>No results to display</p>

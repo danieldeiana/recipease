@@ -15,7 +15,7 @@
         {% if not meal.image %}
             <img src="{% static 'recipe/images/no_image.jpeg' %}" alt="no image available"/>
         {% else %}
-            image is {{ meal.image }} <!-- render image here -->
+            <img src="{{ meal.image }}" alt="an image of {{ meal.image }}"/>
         {% endif %}
         <p>Preperation time - {{ meal.preparation_time }} minutes</p>
         <p>Cooking time - {{ meal.cooking_time }} minutes</p>
@@ -46,7 +46,7 @@
                     {{ comment_form.text }}
                     {{ comment_form.meal_id }}
                     {{ comment_form.user_id }}
-                    <input type="submit" value="add comment"/>
+                    <button type="submit">Add comment</button>
                     <script>
                         var meal_id = document.getElementsByTagName('input')[2];
                         var user_id = document.getElementsByTagName('input')[3];

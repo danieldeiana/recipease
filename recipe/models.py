@@ -54,7 +54,7 @@ class Meal(models.Model):
     category = models.ManyToManyField(Category)
     step = models.ManyToManyField(Step)
     ingredient = models.ManyToManyField(Ingredient)
-    comment = models.ManyToManyField(Comment)
+    comment = models.ManyToManyField(Comment, blank=True, null=True)
 
     def __str__(self):
         return self.name
