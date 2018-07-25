@@ -17,7 +17,12 @@ def index(request, favourites=None):
     current_user = request.user
     premium = {}
     if current_user.username:
-        premium = Premium.objects.get(user_id=current_user.id)
+        try:
+            premium = Premium.objects.get(user_id=current_user.id)
+        except:
+            new_premium = Premium(user_id=current_user.id)
+            new_premium.save()
+            premium = new_premium
     context = {
         'filter': meal_filter,
         'premium': premium,
